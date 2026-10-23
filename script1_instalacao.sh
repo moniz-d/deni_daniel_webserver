@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 sudo dnf update -y
 sudo dnf install -y httpd mariadb-server php php-mysqlnd
 sudo systemctl start httpd
