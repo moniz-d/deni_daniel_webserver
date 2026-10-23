@@ -1,19 +1,12 @@
 #!/bin/bash
 
-echo "=== 1. Atualizando o sistema ==="
+
 sudo dnf update -y
-
-echo "=== 2. Instalação: Apache, PHP e MariaDB ==="
 sudo dnf install -y httpd mariadb-server php php-mysqlnd
-
-echo "=== 3. Ativação de serviços ==="
 sudo systemctl start httpd
 sudo systemctl enable httpd
-
 sudo systemctl start mariadb
 sudo systemctl enable mariadb
-
-echo "=== 4. Criação do ficheiro info.php ==="
 sudo bash -c 'cat > /var/www/html/index.html <<EOF
 <!DOCTYPE html>
 <html lang="pt">
@@ -36,6 +29,20 @@ sudo bash -c 'cat > /var/www/html/index.html <<EOF
 </body>
 </html>
 EOF'
+
+sudo bash -c 'cat > /var/www/html/info.php <<EOF
+<?php
+phpinfo();
+?>
+EOF'
+
+echo "-> A testar localmente:"
+curl -s -I http://localhost | head -n 5
+
+echo "-> A verificar o IP público do servidor:"
+curl -s ifconfig.me
+echo -e "\n"
+
 echo "=============================================================================="
-echo "Instalação concluída com sucesso!"
+echo "Script 1 executado com sucesso!"
 echo "=============================================================================="
