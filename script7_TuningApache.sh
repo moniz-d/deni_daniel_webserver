@@ -1,16 +1,25 @@
 #!/bin/bash
-echo "=== 1. Ativação do KeepAlive ==="
 
-sudo sed -i 's/KeepAlive Off/KeepAlive On/' /etc/httpd/conf/httpd.conf
 
-echo "=== 2. Ativando do mod_deflate ==="
-
+sudo sed -i 's/KeepAlive Off/KeepAlive On/' /etc/httpd/conf/httpd.conf 2>/dev/null || true
+sudo bash -c 'cat > /etc/httpd/conf.d/tuning.conf <<EOF
+KeepAlive On
+MaxKeepAliveRequests 100
+KeepAliveTimeout 5
+MaxRequestWorkers 150
+EOF'
 sudo bash -c 'cat > /etc/httpd/conf.d/deflate.conf <<EOF
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
 </IfModule>
 EOF'
-
-echo "=== 3. Reiniciando o Apache ==="
+sudo dnf install -y mod_ssl openssl
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /etc/pki/tls/private/apache-selfsigned.key \
+  -out /etc/pki/tls/certs/apache-selfsigned.crt \
+  -subj "/C=PT/ST=Lisboa/L=Lisboa/O=Projeto/OU=IT/CN=localhost" 2>/dev/null || true
 sudo systemctl restart httpd
 
+echo "=============================================================================="
+echo "Script 7 executado com sucesso! Apache otimizado."
+echo "=============================================================================="
