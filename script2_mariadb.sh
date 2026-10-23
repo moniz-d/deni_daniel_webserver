@@ -1,11 +1,7 @@
 #!/bin/bash
-# ==============================================================================
-# Script 2: Configuração Segura do MariaDB
-# ==============================================================================
 
-echo "=== 1. Aplicando configurações de segurança no MariaDB ==="
+echo "=== 1. Configuração de segurança no MariaDB ==="
 
-# Define a password de root para a base de dados (podes alterar 'sua_senha_aqui' se quiseres)
 DB_ROOT_PASSWORD="atec123"
 
 sudo mysql -u root <<EOF
@@ -17,5 +13,5 @@ FLUSH PRIVILEGES;
 EOF
 
 echo "=============================================================================="
-echo "MariaDB configurado com segurança com sucesso!"
+echo "MariaDB configurado com sucesso!"
 echo "=============================================================================="
