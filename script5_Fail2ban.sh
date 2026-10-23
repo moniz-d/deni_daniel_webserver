@@ -9,7 +9,7 @@ bantime  = 600
 findtime = 600
 maxretry = 3
 destemail = grsc@atec.com
-sender = grsc@atec.pt
+sender = admin@atec.pt
 action = %(action_mwl)s
 
 [sshd]
