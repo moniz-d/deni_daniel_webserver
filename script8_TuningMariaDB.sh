@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "=== 1. Aplicando ajustes básicos no my.cnf ==="
+echo "=== 1. Ajustes básicos no my.cnf ==="
 MY_CNF="/etc/my.cnf"
 
 sudo bash -c "cat >> $MY_CNF <<EOF
