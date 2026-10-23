@@ -10,7 +10,7 @@ scripts=(
     "script1_instalacao.sh"
     "script2_mariadb.sh"
     "script3_config_rede.sh"
-    "script4_SELinux.sh"
+    "script4_SElinux.sh"
     "script5_Fail2ban.sh"
     "script6-Mod_security.sh"
     "script7_TuningApache.sh"
