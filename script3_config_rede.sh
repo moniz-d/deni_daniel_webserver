@@ -12,8 +12,7 @@ sudo firewall-cmd --permanent --add-service=http
 sudo firewall-cmd --permanent --add-service=https
 sudo firewall-cmd --reload
 
-echo "=== 3. Estado atual das regras da Firewall ==="
-sudo firewall-cmd --list-all
+
 
 echo "=============================================================================="
 echo "Rede e Firewall configuradas com sucesso!"
