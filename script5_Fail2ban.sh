@@ -1,22 +1,39 @@
 #!/bin/bash
-echo "=== 1. Instalação: Fail2ban ==="
-sudo dnf install -y epel-release
-sudo dnf install -y fail2ban
 
-echo "=== 2. Configuração básica para o SSH ==="
+
+sudo dnf install -y epel-release
+sudo dnf install -y fail2ban fail2ban-systemd
 sudo bash -c 'cat > /etc/fail2ban/jail.local <<EOF
+[DEFAULT]
+bantime  = 600
+findtime = 600
+maxretry = 3
+destemail = grsc@atec.com
+sender = grsc@atec.pt
+action = %(action_mwl)s
+
 [sshd]
 enabled = true
 port = ssh
 logpath = %(sshd_log)s
-maxretry = 3
-bantime = 600
+backend = systemd
+
+[apache-auth]
+enabled = true
+port    = http,https
+logpath = %(apache_error_log)s
+
+[apache-noscript]
+enabled = true
+port    = http,https
+logpath = %(apache_error_log)s
 EOF'
 
-echo "=== 3. Ativação do serviço Fail2ban ==="
-sudo systemctl start fail2ban
+
+sudo systemctl restart fail2ban
 sudo systemctl enable fail2ban
+sudo fail2ban-client status
 
 echo "=============================================================================="
-echo "Fail2ban instalado e ativo para o SSH!"
+echo "Script 5 executado com sucesso! Fail2ban ativo para SSH e Apache."
 echo "=============================================================================="
