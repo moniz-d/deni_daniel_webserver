@@ -18,6 +18,16 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -keyout /etc/pki/tls/private/apache-selfsigned.key \
   -out /etc/pki/tls/certs/apache-selfsigned.crt \
   -subj "/C=PT/ST=Lisboa/L=Lisboa/O=Projeto/OU=IT/CN=localhost" 2>/dev/null || true
+
+  sudo bash -c 'cat > /etc/httpd/conf.d/ssl-site.conf <<EOF
+<VirtualHost *:443>
+    ServerName localhost
+    SSLEngine on
+    SSLCertificateFile /etc/pki/tls/certs/apache-selfsigned.crt
+    SSLCertificateKeyFile /etc/pki/tls/private/apache-selfsigned.key
+    DocumentRoot /var/www/html
+</VirtualHost>
+EOF'
 sudo systemctl restart httpd
 
 echo "=============================================================================="
