@@ -2,6 +2,9 @@
 
 sudo dnf install -y mod_security mod_security_crs
 
+sudo sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/httpd/conf.d/mod_security.conf || true
+sudo sed -i 's/SecRuleEngine Off/SecRuleEngine On/' /etc/httpd/conf.d/mod_security.conf || true
+
 sudo systemctl restart httpd
 
 echo "=== Simulação e Teste de Ataques (SQLi e XSS) ==="
