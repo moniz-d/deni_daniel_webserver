@@ -18,7 +18,7 @@ sudo dnf install -y mod_ssl openssl
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -keyout /etc/pki/tls/private/apache-selfsigned.key \
   -out /etc/pki/tls/certs/apache-selfsigned.crt \
-  -subj "/C=PT/ST=Lisboa/L=Lisboa/O=Projeto/OU=IT/CN=192.168.217.134" \
+  -subj "/C=PT/ST=Lisboa/L=Lisboa/O=ATEC/OU=Atrás do 20/CN=192.168.217.134" \
   -addext "subjectAltName=IP:192.168.217.134,DNS:localhost" 2>/dev/null || true
 
   sudo bash -c 'cat > /etc/httpd/conf.d/ssl-site.conf <<EOF
