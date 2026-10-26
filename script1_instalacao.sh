@@ -35,8 +35,8 @@ phpinfo();
 ?>
 EOF'
 
-echo "-> A testar localmente:"
-curl -s -I http://localhost | head -n 5
+sudo chown -R apache:apache /var/www/html
+sudo chmod -R 755 /var/www/html
 
 
 
