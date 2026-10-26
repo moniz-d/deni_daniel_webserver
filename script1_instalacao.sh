@@ -38,9 +38,7 @@ EOF'
 echo "-> A testar localmente:"
 curl -s -I http://localhost | head -n 5
 
-echo "-> A verificar o IP público do servidor:"
-curl -s ifconfig.me
-echo -e "\n"
+
 
 echo "=============================================================================="
 echo "Script 1 executado com sucesso!"
