@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 sudo systemctl start firewalld
 sudo systemctl enable firewalld
 sudo firewall-cmd --permanent --add-service=ssh
